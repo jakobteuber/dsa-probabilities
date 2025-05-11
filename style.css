@@ -1,0 +1,85 @@
+article {
+    max-width: 70ch;
+    padding: 1ch;
+    margin: auto;
+
+    font-size: large;
+    font-family: "Gentium Plus", Garamond, Baskerville, Georgia, 'Times New Roman', Times, serif;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    font-size: medium;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#input-form {
+    max-width: 40ch;
+    margin: auto;
+
+    display: grid;
+    grid-template-columns: auto auto;
+    row-gap: 1ch;
+    column-gap: 3ch;
+}
+
+#result {
+    max-width: 40ch;
+    margin: auto;
+    margin-top: 2ch;
+
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 3ch;
+}
+
+.percent,
+#expected {
+    width: 8ch;
+    text-align: right;
+}
+
+.percent::after {
+    content: ' %';
+}
+
+#expected::after {
+    content: ' QS';
+}
+
+.formula {
+    display: grid;
+    grid-template-columns: min-content min-content min-content;
+    column-gap: 1ch;
+    row-gap: 0;
+    width: fit-content;
+    margin: auto;
+}
+
+.formula * {
+    width: max-content;
+}
+
+table {
+    margin: auto;
+    margin-top: 2ch;
+    margin-bottom: 2ch;
+    padding-left: 2ch;
+    padding-right: 2ch;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+}
+
+td,
+th {
+    text-align: center;
+    padding-left: 1ch;
+    padding-right: 1ch;
+}

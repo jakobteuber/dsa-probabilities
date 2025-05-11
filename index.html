@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="style.css">
+
+    <title>3W20-Probe</title>
+</head>
+
+<body>
+    <article>
+        <section>
+            <h1>Gelingwarscheinlichkeiten einer 3W20-Probe in DSA5</h1>
+
+            <form id="input-form">
+                <label for="a">Eigenschaft 1:</label>
+                <input type="number" name="a" id="a" min="0" max="20" value="10">
+                <label for="b">Eigenschaft 2:</label>
+                <input type="number" name="b" id="b" min="0" max="20" value="10">
+                <label for="c">Eigenschaft 3:</label>
+                <input type="number" name="c" id="c" min="0" max="20" value="10">
+                <label for="fw">Fertigkeitswert:</label>
+                <input type="number" name="fw" id="fw" min="0" max="20" value="0">
+                <label for="mod">Modifikator:</label>
+                <input type="number" name="mod" id="mod" min="-10" max="10" value="0">
+            </form>
+
+            <div id="result">
+                <span>Fehlgeschlagen:</span> <span class="percent" id="qs0">??</span>
+                <span>Qualitätsstufe I:</span> <span class="percent" id="qs1">??</span>
+                <span>Qualitätsstufe II:</span> <span class="percent" id="qs2">??</span>
+                <span>Qualitätsstufe III:</span> <span class="percent" id="qs3">??</span>
+                <span>Qualitätsstufe VI:</span> <span class="percent" id="qs4">??</span>
+                <span>Qualitätsstufe V:</span> <span class="percent" id="qs5">??</span>
+                <span>Qualitätsstufe VI:</span> <span class="percent" id="qs6">??</span>
+                <span>Erwartungswert:</span> <span id="expected">??</span>
+            </div>
+        </section>
+        <br>
+        <section>
+            <p>
+                Die 3W20-Probe ist ohne Zweifel eine stochastische Herausforderung
+                für Spieler und Meister. Diese Seite berechnet einige Kenngrößen für
+                die 3W20-Probe, wie sie in DSA5 verwendet wird.
+            </p>
+            <p>
+                Insgesamt gibt es 20 × 20 × 20 = 8000 Möglichkeiten wie eine Probe ausgehen kann.
+            </p>
+            <h3>Auswertung einer Probe</h3>
+            <ol>
+                <li>Seien <i>e</i>₁, <i>e</i>₂, <i>e</i>₃ die relevanten Eigenschaftswerte, und
+                    <i>w</i>₁, <i>w</i>₂, <i>w</i>₃ die Würfelergebnisse in Reihenfolge.
+                </li>
+                <li>
+                    <p>Wenn zwei Würfel eine Eins zeigen, dann gilt die Probe immer als bestanden.
+                        Zeigen drei eine Eins, gelingt die Probe sogar noch spektakulärer.</p>
+                    <p>Als kritische Erfolge sind sie „besser gelungen als üblich“, das Regelwerk
+                        legt allerdings keine konkrete Interpretation fest und überlässt es stattdessen
+                        dem Meister, die Situation auszugestalten. Hier wird eine Doppel-Eins gezählt
+                        als wäre die Probe mit vollen Fertigkeitspunkten bestanden, eine Dreifach-Eins so, als wäre
+                        sie mit der doppelten Anzahl der sonst möglichen Fertigkeitspunkten bestanden.</p>
+                </li>
+                <li>
+                    <p>Wenn zwei Würfel eine Zwanzig zeigen, dann misslingt die Probe immer.
+                        Zeigen drei eine Zwanzig, schlägt die Probe noch katastrophaler fehl.</p>
+                    <p>Mit Qualitätsstufen ist es unmöglich schweres scheitern abzubilden, Patzer
+                        werden wie normale Fehlschläge mit 0 QS gezählt. Das führt in der Simulation
+                        zu einer kleinen Asymmetrie zu Gunsten der Spieler, weil Kritische Erfolge
+                        abgebildet, aber Patzer wie normale Fehlschläge gezählt werden.</p>
+                </li>
+                <li>
+                    <p>Wenn kein Kritischer Erfolg oder Patzer vorliegt, werden die übrigen
+                        Fertigkeitspunkte bestimmt:</p>
+                    <p class="formula">
+                        <span><i>Übrig</i></span><span>=</span><span><i>FW</i></span>
+                        <span></span><span>+</span><span>min{ <i>e</i>₁ + <i>mod</i> – <i>w</i>₁, 0 }</span>
+                        <span></span><span>+</span><span>min{ <i>e</i>₂ + <i>mod</i> – <i>w</i>₂, 0 }</span>
+                        <span></span><span>+</span><span>min{ <i>e</i>₃ + <i>mod</i> – <i>w</i>₃, 0 }</span>
+                    </p>
+                    <p>Wenn die übrige Punktzahl negativ ist, gilt die Probe als misslungen.
+                        Ansonsten werden die QS nach folgender Tabelle bestimmt:</p>
+
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th>Übrig</td>
+                                <th>QS</td>
+                            </tr>
+                            <tr>
+                                <td>0–3</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td>4–6</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <td>7–9</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td>10–12</td>
+                                <td>4</td>
+                            </tr>
+                            <tr>
+                                <td>13–15</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <td>16+</td>
+                                <td>6</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </li>
+            </ol>
+
+        </section>
+    </article>
+
+    <script src="probabilities.js"></script>
+
+</body>
+
+</html>
